@@ -1,0 +1,103 @@
+.chatbox{
+    display: flex;
+    flex-direction: column;
+    flex: 0.7;
+}
+
+.chatbox_header{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid lightgray;
+    flex: 0.15
+}
+
+.chatbox_header_details{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    
+}
+
+
+
+.chatbox_header_details>P{
+    margin-top: -20px;
+    
+}
+
+
+.chatbox_body{
+    /* background-image: url('https://images.unsplash.com/photo-1601529686322-350562cc5d67?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1115&q=80') ; */
+    /* flex: 0.85; */
+    /* background-repeat: repeat; */
+
+
+
+}
+
+.message_scroll{
+    overflow:scroll;
+}
+
+.chatbox_message_sender {
+    padding: 10px;
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 10px;
+}
+
+.chatbox_message_receiver{
+    /* the below commented properties would
+    be used ffrom .chatbox_message_sender */
+    /* width: fit-content;
+    padding : 10px;
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px; */
+    margin-left: auto;
+    background-color: #dcf8c6;
+}
+
+
+.span_name {
+    position: absolute;
+    top: 0px;
+    font-size: xx-small;
+    font-weight: 800px;
+    font-style: bold;
+}
+
+.span_time {
+    margin-left: 10px;
+    font-size: xx-small;
+}
+
+.chatbox_footer{
+    margin-top: auto;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    height: 62px;
+    background-color: lightgray;
+
+}
+
+
+.chatbox_footer_form{
+    display: flex;
+    flex: 1;
+    background-color: white;
+    align-content: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.chatbox_footer_form >input {
+    flex: 1;
+    border: none;
+    
+}

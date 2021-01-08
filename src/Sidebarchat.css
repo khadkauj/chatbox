@@ -1,0 +1,33 @@
+.sidebar_chat{
+    overflow: scroll;
+    background-color: white;
+}
+
+
+.start_chat {
+    display: flex;
+    margin: 10px;
+    background-color:whitesmoke;
+}
+
+.start_chat_name_last_message {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background-color:whitesmoke;
+    flex: 1;
+    align-items: flex-start;
+    border-radius: 10px;
+    
+
+}
+
+.start_chat_name_last_message:hover{
+    background-color:white;
+
+}
+
+.Avatar{
+    align-self: center;
+    
+}
