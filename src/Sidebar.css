@@ -8,13 +8,17 @@
     
     display: flex;
     border-right: 1px solid darkgray;
-    padding: 10px;
+    padding: 1em;
     /* border-radius: 10px; */
     /* background-color: lightgray; */
 }
 
+
+
+
+
 .sidebar_header_middle>h3{
-    margin-left: 20px;
+   margin-left: 20px;
    margin-top: 0%;
    margin-bottom: 0%;
 }
@@ -58,7 +62,8 @@
 }
 
 .sidebar_chat{
-    background-color:inherit;
+    /* overflow: hidden; */
+    background-color:red;
     flex: 1;
     width: 100%;
     margin: 0;

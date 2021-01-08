@@ -92,11 +92,19 @@ function Chatbox() {
     return (
         <div  className="chatbox">
             <div className="chatbox_header">
-                <Avatar className='chatbox_header_avatar' />
+                <div  className='chatbox_header_avatar'>
+                    <Avatar />
+                </div>
+               
                 <div className='chatbox_header_details'>
                     <h3>{roomName}</h3>
-                    <p>Last Seen At...</p>
-                    <ExitToAppIcon onClick={log_out} />
+                    <p>Last Seen At...</p>                  
+                </div>
+                <div className='exit_icon' onClick={log_out}>
+                    <div className='exit_icon_icon'>
+                        <ExitToAppIcon  />
+                    </div>
+                    <p>LogOut</p>
                 </div>
             </div>
         
@@ -105,7 +113,7 @@ function Chatbox() {
          <div id='' className='message_scroll'>
                 {messages_from_store.map(a_message => 
                 (
-                    <div className='chatbox_body'>
+                    <div id='' className='chatbox_body'>
                         <p className={`chatbox_message_sender ${ user === a_message.name  && `chatbox_message_receiver`}`}>
                             <span className='span_name'>{a_message.name}</span>{a_message.message}<span className='span_time'>{new Date(messages_from_store.timestamp?.toDate()).toUTCString()}</span>
                         </p>

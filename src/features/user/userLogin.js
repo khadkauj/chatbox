@@ -48,7 +48,7 @@ function Login() {
             <div className='buttons'>
                 {/* <input className="input-reset ba b--black-20 pa2 mb2 db w-100"  value={name} onChange={(e) => setname(e.target.value)} placeholder="Your Name" type="text"  /> */}
                 <Button className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black" disabled={!name}  variant="contained" color="primary" type="submit" onClick={LogInFunc}>LogMeIn</Button>
-                <Button className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black"   variant="contained" color="secondary" onClick={(e) => LogOutFunc()}>LogMeOut</Button>
+                {/* <Button className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black"   variant="contained" color="secondary" onClick={(e) => LogOutFunc()}>LogMeOut</Button> */}
             </div>
             
         </div>
