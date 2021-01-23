@@ -1,81 +1,102 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    flex: 0.3;
+      display: flex;
+      flex: 0.2;
+      flex-direction: column;
+      font-family: cursive;
+      width: fit-content;
+      width: 40%;
 }
 
 .sidebar_header {
-    
-    display: flex;
-    border-right: 1px solid darkgray;
-    padding: 1em;
-    /* border-radius: 10px; */
-    /* background-color: lightgray; */
+      display: flex;
+      padding: 1em;
+      height: 12%;
 }
 
-
-
-
-
-.sidebar_header_middle>h3{
-   margin-left: 20px;
-   margin-top: 0%;
-   margin-bottom: 0%;
+.sidebar_header_middle {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
 }
-
-.sidebar_header_middle>p{
-   margin-left: 20px;
-   margin-top: 0%;
-}
-
-.sidebar_header_middle{
-    display: flex;
-    flex-direction: column;
-}
-
-
-.sidebar_search_outside{
-    padding: 10px;
-    background-color: whitesmoke;
-}
-
 
 .sidebar_search {
-     background-color: white;
-     width: 100%;
-     display: flex;
-     align-items: center;
-     /* the below two are standard optend by whatsapp */
-     height: 35px;
-     border-radius: 20px;
-
+      background-color: white;
+      display: flex;
+      width: auto;
+      padding: 10px;
+      border-radius: 10px;
 }
 
-.sidebar_search >  input {
-    border: none;
+.input {
+      border: none;
+      outline: none;
+      width: 100%;
 }
 
-.new_chat{
-    background-color: white;
-    text-align: center;
-    border: 1px solid lightgray;
+.new_chat {
+      background-color: white;
+      text-align: center;
+      border: 1px solid lightgray;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 0.5rem;
 }
 
-.sidebar_chat{
-    /* overflow: hidden; */
-    background-color:red;
-    flex: 1;
-    width: 100%;
-    margin: 0;
-   
+.new_chat:hover {
+      background-color: thistle;
+      cursor: pointer;
 }
 
-/* .sidebar_chat_scroll{
-    overflow:scroll;
+.sidebar_scroll {
+      overflow: scroll;
+}
+.sidebar_scroll::-webkit-scrollbar {
+      display: none;
+}
 
-} */
+/* Hide scrollbar for IE, Edge and Firefox */
+.sidebar_scroll {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+}
+.sidebar_chat {
+      border: 1px solid lightgray;
+}
 
-.new_chat:hover{
-    background-color: thistle;
-    cursor: pointer;
+@media only screen and (max-width: 600px) {
+      .sidebar {
+            display: flex;
+            flex-direction: column;
+            font-family: cursive;
+            background-color: white;
+            position: relative;
+            width: 20%;
+            height: 80%;
+      }
+
+      .sidebar_search {
+            display: none;
+      }
+      .sidebar_header {
+            display: flex;
+            border: 1px solid green;
+            padding: 10px 5px;
+            height: 8%;
+            align-items: center;
+            justify-content: center;
+      }
+      .sidebar_header_middle {
+            display: none;
+      }
+      .new_chat {
+            background-color: white;
+            text-align: center;
+            border: 1px solid lightgray;
+            width: 100%;
+      }
+
+      .sidebar_scroll {
+            overflow: scroll;
+            width: 100%;
+      }
 }
