@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Sidebar from "./Sidebar";
 import Chatbox from "./Chatbox";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, HashRouter } from "react-router-dom";
 import { logout, selectUser, setUsername } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./features/user/userLogin";
@@ -35,7 +35,7 @@ function App() {
                   ) : (
                         <div className="app_body">
                               <Router>
-                                    <Switch>
+                                    <HashRouter>
                                           {/* <Route path='/home'>
                             <h1>Welcome to home page</h1>
                         </Route> */}
@@ -55,7 +55,7 @@ function App() {
                                                 <Sidebar />
                                                 <Chatbox />
                                           </Route>
-                                    </Switch>
+                                    </HashRouter>
                               </Router>
                         </div>
                   )}

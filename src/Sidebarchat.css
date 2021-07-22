@@ -1,34 +1,40 @@
 .start_chat {
-      display: flex;
-      margin: 10px;
+  display: flex;
+  margin: 0px 10px;
 }
 
 .start_chat_name_last_message {
-      display: flex;
-      flex-direction: column;
-      margin: 10px;
-      background-color: whitesmoke;
-      align-items: flex-start;
-      border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  background-color: whitesmoke;
+  align-items: flex-start;
+  border-radius: 10px;
 }
 
 .start_chat {
-      transition: 0.5sec;
+  transition: 0.5sec;
 }
 
 .start_chat:hover {
-      background-color: white;
-      transform: scale(1.1);
+  background-color: white;
+  transform: scale(1.1);
 }
 
-@media only screen and (max-width: 600px) {
-      .start_chat_name_last_message {
-            display: none;
-      }
-      .avatarHover {
-            transition: 0.5sec;
-      }
-      .avatarHover:hover {
-            transform: scale(1.1);
-      }
+/* @media only screen and (max-width: 600px) { */
+.start_chat_name_last_message {
+  display: none;
+}
+.avatarHover {
+  transition: 0.5sec;
+}
+.avatarHover:hover {
+  transform: scale(1.1);
+}
+/* } */
+
+@media screen and (min-width: 600px) {
+  .start_chat_name_last_message {
+    display: block;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import "./Chatbox.css";
 import CreateIcon from "@material-ui/icons/Create";
@@ -9,6 +9,8 @@ import db from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "firebase";
 import { logout, selectUser } from "./features/user/userSlice";
+import SendIcon from '@material-ui/icons/Send';
+import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 
 function Chatbox() {
       const [message, setmessage] = useState("");
@@ -34,7 +36,7 @@ function Chatbox() {
             if (id) {
                   db.collection("rooms")
                         .doc(id)
-                        .onSnapshot((snapshot) => setroomName(snapshot.data().personName));
+                        .onSnapshot((snapshot) => setroomName(snapshot.data()?.personName));
             }
       }, [id]);
 
@@ -44,7 +46,12 @@ function Chatbox() {
                   .doc(id)
                   .collection("messages")
                   .orderBy("timestamp", "asc")
-                  .onSnapshot((snapshot) => setmessages_from_store(snapshot.docs.map((doc) => doc.data())));
+                  .onSnapshot((snapshot) => setmessages_from_store(snapshot.docs.map((doc) => doc.data())))
+
+            // scroll to bottom
+
+
+
             // }
       }, [id]); //the id param here is very
       //important. it must be bear in mind
@@ -74,13 +81,18 @@ function Chatbox() {
             console.log("cliecked_logout_after_dispatch");
       };
 
-      console.log(roomName);
+      useEffect(() => {
+            var div = document.querySelector("#scrollDiv")
+            div.scrollTop = div?.scrollHeight - div?.clientHeight
+
+      }, [messages_from_store])
 
       return (
             <div className="chatbox">
                   <div className="chatbox_header">
                         <div className="chatbox_header_avatar">
                               <Avatar />
+
                         </div>
 
                         <div className="chatbox_header_details">
@@ -95,13 +107,12 @@ function Chatbox() {
                         </div>
                   </div>
 
-                  <div id="" className="message_scroll">
+                  <div id="scrollDiv" className="message_scroll">
                         {messages_from_store.map((a_message) => (
                               <div id="" className="chatbox_body">
                                     <p
-                                          className={`chatbox_message_sender ${
-                                                user === a_message.name && `chatbox_message_receiver`
-                                          }`}
+                                          className={`chatbox_message_sender ${user === a_message.name && `chatbox_message_receiver`
+                                                }`}
                                     >
                                           {" "}
                                           <br />
@@ -116,15 +127,14 @@ function Chatbox() {
                   </div>
 
                   <div className="chatbox_footer">
-                        <form onClick={sendMessage} className="chatbox_footer_form">
-                              <CreateIcon />
-                              <input
+                        <form className="chatbox_footer_form" style={{ fontSize: "22px" }}  >
+                              <textarea style={{ border: "none", outline: "none", flex: "1" }}
                                     value={message}
                                     onChange={(e) => setmessage(e.target.value)}
                                     type="text"
                                     placeholder="Type a message"
                               />
-                              <button className="form_button" type="submit" />
+                              <SendOutlinedIcon fontSize="large" onClick={sendMessage} className="form_button" type="submit" style={{ cursor: "pointer" }} />
                         </form>
                   </div>
             </div>

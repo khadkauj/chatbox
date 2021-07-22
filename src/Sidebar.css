@@ -1,102 +1,130 @@
 .sidebar {
-      display: flex;
-      flex: 0.2;
-      flex-direction: column;
-      font-family: cursive;
-      width: fit-content;
-      width: 40%;
+  display: flex;
+  flex: 0.2;
+  flex-direction: column;
+  font-family: cursive;
+  width: fit-content;
+  width: 100%;
 }
 
 .sidebar_header {
-      display: flex;
-      padding: 1em;
-      height: 12%;
+  display: flex;
+  padding: 1em;
+  height: 12%;
 }
 
 .sidebar_header_middle {
-      display: flex;
-      flex-direction: column;
-      margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 
 .sidebar_search {
-      background-color: white;
-      display: flex;
-      width: auto;
-      padding: 10px;
-      border-radius: 10px;
+  background-color: white;
+  display: flex;
+  width: auto;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .input {
-      border: none;
-      outline: none;
-      width: 100%;
+  border: none;
+  outline: none;
+  width: 100%;
 }
 
 .new_chat {
-      background-color: white;
-      text-align: center;
-      border: 1px solid lightgray;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border-radius: 0.5rem;
+  background-color: white;
+  text-align: center;
+  border: 1px solid lightgray;
+  border-left: none;
+  border-right: none;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin: 10px 0px;
 }
 
-.new_chat:hover {
-      background-color: thistle;
-      cursor: pointer;
+.classRoom:hover {
+  background-color: thistle;
+  cursor: pointer;
 }
 
 .sidebar_scroll {
-      overflow: scroll;
+  overflow: scroll;
 }
 .sidebar_scroll::-webkit-scrollbar {
-      display: none;
+  display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .sidebar_scroll {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .sidebar_chat {
-      border: 1px solid lightgray;
+  border: 1px solid lightgray;
 }
 
-@media only screen and (max-width: 600px) {
-      .sidebar {
-            display: flex;
-            flex-direction: column;
-            font-family: cursive;
-            background-color: white;
-            position: relative;
-            width: 20%;
-            height: 80%;
-      }
+/* @media only screen and (max-width: 600px) { */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  font-family: cursive;
+  background-color: white;
+  position: relative;
+  width: 20%;
+}
 
-      .sidebar_search {
-            display: none;
-      }
-      .sidebar_header {
-            display: flex;
-            border: 1px solid green;
-            padding: 10px 5px;
-            height: 8%;
-            align-items: center;
-            justify-content: center;
-      }
-      .sidebar_header_middle {
-            display: none;
-      }
-      .new_chat {
-            background-color: white;
-            text-align: center;
-            border: 1px solid lightgray;
-            width: 100%;
-      }
+.sidebar_search {
+  display: none;
+}
+.sidebar_header {
+  display: flex;
+  border: 1px solid green;
+  padding: 10px 5px;
+  height: 8%;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar_header_middle {
+  display: none;
+}
 
-      .sidebar_scroll {
-            overflow: scroll;
-            width: 100%;
-      }
+.sidebar_scroll {
+  overflow: scroll;
+  width: 100%;
+}
+/* } */
+.personNameInSmallGroup {
+  text-align: center;
+  font-size: 12px;
+}
+
+.hrGroup {
+  width: 80%;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 600px) {
+  .sidebar_search {
+    display: flex;
+  }
+  .sidebar_header_middle {
+    display: flex;
+    font-size: 14px;
+  }
+  .sidebar {
+    min-width: 250px;
+  }
+  .personNameInSmallGroup {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hrGroup {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
