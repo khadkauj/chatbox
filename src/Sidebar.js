@@ -42,11 +42,7 @@ function Sidebar() {
                   });
             }
       };
-
-      console.log("sidbar page", user, useremail, userphotourl);
-      console.log("rooms", rooms);
-      console.log("for avatar icon", user.photourl);
-
+      console.log("url,", rooms);
       return (
 
             <div className="sidebar">
@@ -66,13 +62,13 @@ function Sidebar() {
                   </div>
 
                   <div onClick={Add} className="new_chat">
-                        <h3 style={{ fontSize: "14px" }} >Add New Chat</h3>
+                        <h3 style={{ fontSize: "14px", cursor: "pointer" }} className="addChat" >Add New Chat</h3>
                   </div>
                   <div className="sidebar_scroll">
                         <div className="sidebar_chat">
                               {rooms.map((a_room) => (
                                     <div className="classRoom" >
-                                          <Sidebarchat id={a_room.id} key={a_room.id} name={a_room.data.personName} />
+                                          <Sidebarchat id={a_room.id} key={a_room.id} name={a_room.data.personName} photoURL={a_room.data.photoURL} />
                                           <p className="personNameInSmallGroup"> {a_room.data.personName}</p>
                                           <hr className="hrGroup" />
                                     </div>

@@ -20,13 +20,12 @@
   .App {
     display: grid;
     place-items: center;
-
+    margin-top: 14px;
     margin-right: auto;
     margin-left: auto;
   }
   .app_body {
-    /* max-width: 960px;
-    min-width: 900px; */
+    height: 97vh;
     width: 960px;
   }
 }

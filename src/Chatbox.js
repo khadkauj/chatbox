@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import db from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "firebase";
-import { logout, selectUser } from "./features/user/userSlice";
+import { logout, selectEmail, selectUser } from "./features/user/userSlice";
 import SendIcon from '@material-ui/icons/Send';
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 
@@ -26,12 +26,10 @@ function Chatbox() {
       //  is given as id value
       // you can also print it as a console value and check it
 
-      const user = useSelector(selectUser);
+      const userEmail = useSelector(selectEmail);
+      console.log("user is,", userEmail);
 
       const { id } = useParams();
-
-      console.log("useparam", id);
-
       useEffect(() => {
             if (id) {
                   db.collection("rooms")
@@ -42,11 +40,10 @@ function Chatbox() {
 
       useEffect(() => {
             // if (id) {
-            db.collection("rooms")
-                  .doc(id)
-                  .collection("messages")
-                  .orderBy("timestamp", "asc")
-                  .onSnapshot((snapshot) => setmessages_from_store(snapshot.docs.map((doc) => doc.data())))
+            db.collection("rooms").doc(userEmail).collection("messages").doc(id)
+                  .get((snapshot) => setmessages_from_store(snapshot.docs.map((doc) => doc.data())))
+
+
 
             // scroll to bottom
 
@@ -63,9 +60,9 @@ function Chatbox() {
       const sendMessage = (event) => {
             event.preventDefault();
             if (message !== "") {
-                  db.collection("rooms").doc(id).collection("messages").add({
+                  db.collection("rooms").doc(userEmail).collection("messages").doc(id).set({
                         message: message,
-                        name: user,
+                        name: userEmail,
                         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                   });
                   setmessage("");
@@ -111,7 +108,7 @@ function Chatbox() {
                         {messages_from_store.map((a_message) => (
                               <div id="" className="chatbox_body">
                                     <p
-                                          className={`chatbox_message_sender ${user === a_message.name && `chatbox_message_receiver`
+                                          className={`chatbox_message_sender ${userEmail === a_message.name && `chatbox_message_receiver`
                                                 }`}
                                     >
                                           {" "}

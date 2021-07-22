@@ -5,6 +5,7 @@
   font-family: cursive;
   width: fit-content;
   width: 100%;
+  border: 1px solid lightgray;
 }
 
 .sidebar_header {
@@ -82,7 +83,7 @@
   display: flex;
   border: 1px solid green;
   padding: 10px 5px;
-  height: 8%;
+  height: 10%;
   align-items: center;
   justify-content: center;
 }
@@ -97,7 +98,7 @@
 /* } */
 .personNameInSmallGroup {
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .hrGroup {
@@ -119,6 +120,14 @@
   .personNameInSmallGroup {
     display: none;
   }
+}
+.addChat {
+  transition: 0.5sec;
+}
+
+.addChat:hover {
+  transform: scale(1.1);
+  color: red;
 }
 
 @media screen and (max-width: 600px) {

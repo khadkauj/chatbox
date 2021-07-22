@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link, HashRouter } from "react-
 import { logout, selectUser, setUsername } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./features/user/userLogin";
-import { auth } from "./firebase";
+import db, { auth } from "./firebase";
 
 function App() {
       const user = useSelector(selectUser);
@@ -15,6 +15,15 @@ function App() {
       useEffect(() => {
             auth.onAuthStateChanged((authUser) => {
                   if (authUser) {
+
+                        db.collection("rooms").doc(authUser.email).set({
+                              personName: authUser.email,
+                              timestamp: new Date(),
+                              photoURL: authUser.photoURL
+                        }, { merge: true }).then().catch(error => {
+                              console.log("Error in setting user, ", error);
+                        })
+
                         dispatch(
                               setUsername({
                                     userdetails: authUser.displayName,

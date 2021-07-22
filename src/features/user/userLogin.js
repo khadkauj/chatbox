@@ -13,7 +13,7 @@ function Login() {
       const LogInFunc = (e) => {
             e.preventDefault();
 
-            auth.signInWithPopup(provider)
+            auth.signInWithRedirect(provider)
                   .then((result_we_get) => {
                         disptach(
                               setUsername({
