@@ -20,8 +20,12 @@
   .App {
     display: grid;
     place-items: center;
-    max-width: 960px;
+
     margin-right: auto;
     margin-left: auto;
+  }
+  .app_body {
+    max-width: 960px;
+    min-width: 900px;
   }
 }
