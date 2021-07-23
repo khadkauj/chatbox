@@ -31,19 +31,19 @@ function Chatbox() {
       }, [id, email]);
 
       const [state, setState] = useState(false)
+
+      const [test, setTest] = useState([])
       useEffect(() => {
             const list = []
-            db.collection("messages").doc(id).collection("messages").orderBy("timestamp", "asc").get().then(querySnapshot => {
-                  querySnapshot.forEach(doc => {
-                        list.push(doc.data())
-                  })
-            }).then(nothing => {
-                  setmessages_from_store(list)
-            }).catch(error => console.log("error in fetchig message, ", error))
+            db.collection("messages").doc(id).collection("messages").orderBy("timestamp", "asc").onSnapshot((doc) => {
+                  console.log("Current data: ", doc.docs);
+                  setmessages_from_store(doc.docs.map(dat => dat.data()))
+            });
 
-      }, [id, state]);
 
-      // console.log("msgs", messages_from_store);
+      }, [id]);
+
+      console.log("msgs", test);
 
       const sendMessage = (event) => {
             event.preventDefault();
