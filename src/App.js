@@ -15,11 +15,11 @@ function App() {
       useEffect(() => {
             auth.onAuthStateChanged((authUser) => {
                   if (authUser) {
-
                         db.collection("rooms").doc(authUser.email).set({
                               personName: authUser.email,
                               timestamp: new Date(),
-                              photoURL: authUser.photoURL
+                              photoURL: authUser.photoURL,
+                              uid: authUser.uid
                         }, { merge: true }).then().catch(error => {
                               console.log("Error in setting user, ", error);
                         })
@@ -29,6 +29,7 @@ function App() {
                                     userdetails: authUser.displayName,
                                     photourl: authUser.photoURL,
                                     email: authUser.email,
+                                    uid: authUser.uid,
                               })
                         );
                   } else {

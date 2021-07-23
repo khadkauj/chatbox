@@ -10,27 +10,8 @@
   flex-direction: row;
   border: 1px solid lightgray;
   height: 10%;
-  padding: 10px;
   align-items: center;
-}
-
-.chatbox_header_details {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  padding: 0em;
-}
-
-.chatbox_header_avatar {
-  display: grid;
-  place-items: center;
-  padding-left: 1rem;
-}
-
-.exit_icon {
-  margin-left: auto;
-  display: grid;
-  place-items: center;
+  justify-content: space-between;
 }
 
 .message_scroll {
@@ -100,4 +81,11 @@
 }
 .form_button {
   display: none;
+}
+.chatbox_header_details {
+  display: flex;
+  flex-direction: column;
+  /* margin-left: 10px;
+  padding: 0em; */
+  font-size: 12px;
 }

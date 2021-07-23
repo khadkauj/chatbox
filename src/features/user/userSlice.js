@@ -12,6 +12,9 @@ export const userSlice = createSlice({
             username: null,
             photourl: "",
             email: "",
+            uid: "",
+            chatWithPersonEmail: "",
+            chatWithPersonPhotoUrl: ""
       },
       // and here we describe the reducer
       // Reducers are functions that take the current state
@@ -29,17 +32,23 @@ export const userSlice = createSlice({
                   state.username = action.payload.userdetails;
                   state.photourl = action.payload.photourl;
                   state.email = action.payload.email;
+                  state.uid = action.payload.uid
             },
             logout: (state) => {
                   state.username = null;
                   state.photourl = null;
                   state.email = null;
+                  state.uid = null
             },
+            userWithWhomToChat: (state, action) => {
+                  state.chatWithPersonEmail = action.payload.chatWithPersonEmail
+                  state.chatWithPersonPhotoUrl = action.payload.chatWithPersonPhotoUrl
+            }
       },
 });
 
 // and we basically export this to counterSlice.actions
-export const { setUsername, logout } = userSlice.actions;
+export const { setUsername, logout, userWithWhomToChat } = userSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -57,5 +66,10 @@ export const { setUsername, logout } = userSlice.actions;
 export const selectUser = (state) => state.user.username;
 export const selectPhotourl = (state) => state.user.photourl;
 export const selectEmail = (state) => state.user.email;
+export const selectUid = (state) => state.user.uid;
+export const selectChatWithPersonEmail = (state) => state.user.chatWithPersonEmail;
+export const selectChatWithPersonPhotoUrl = (state) => state.user.chatWithPersonPhotoUrl;
+
+
 
 export default userSlice.reducer;

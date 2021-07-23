@@ -1,81 +1,74 @@
 import React, { useEffect, useState, useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import "./Chatbox.css";
 import CreateIcon from "@material-ui/icons/Create";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Button } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import db from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "firebase";
-import { logout, selectEmail, selectUser } from "./features/user/userSlice";
+import { logout, selectChatWithPersonEmail, selectChatWithPersonPhotoUrl, selectEmail, selectUid, selectUser, userWithWhomToChat } from "./features/user/userSlice";
 import SendIcon from '@material-ui/icons/Send';
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
+
+import "./Chatbox.css";
 
 function Chatbox() {
       const [message, setmessage] = useState("");
       const [roomName, setroomName] = useState([]);
+      const [photoURLForHeader, setPhotoURLForHeader] = useState("")
       const [messages_from_store, setmessages_from_store] = useState([]);
-      // in back days getting a link of other compoet was a headchae ,
-      // but with this we can easliy get a link; the link this is graps
-      // is same as the roomId we declared it in App.js at route path of
-      // line 28 inside which <sidebar>  and <chatbox>  is defined
-
-      // here this roomId is same as id in firebase......
-      // in App.js it gets roomId from as a Link which in sidebarchat.js
-      //  is given as id value
-      // you can also print it as a console value and check it
-
       const userEmail = useSelector(selectEmail);
-      console.log("user is,", userEmail);
-
+      const uid = useSelector(selectUid)
+      const email = useSelector(selectChatWithPersonEmail)
+      const photoURl = useSelector(selectChatWithPersonPhotoUrl)
       const { id } = useParams();
+      const history = useHistory()
+      const dispatch = useDispatch()
       useEffect(() => {
-            if (id) {
-                  db.collection("rooms")
-                        .doc(id)
-                        .onSnapshot((snapshot) => setroomName(snapshot.data()?.personName));
-            }
-      }, [id]);
+            setPhotoURLForHeader(photoURl)
+            setroomName(email)
+      }, [id, email]);
 
+      const [state, setState] = useState(false)
       useEffect(() => {
-            // if (id) {
-            db.collection("rooms").doc(userEmail).collection("messages").doc(id)
-                  .get((snapshot) => setmessages_from_store(snapshot.docs.map((doc) => doc.data())))
+            const list = []
+            db.collection("messages").doc(id).collection("messages").orderBy("timestamp", "asc").get().then(querySnapshot => {
+                  querySnapshot.forEach(doc => {
+                        list.push(doc.data())
+                  })
+            }).then(nothing => {
+                  setmessages_from_store(list)
+            }).catch(error => console.log("error in fetchig message, ", error))
 
+      }, [id, state]);
 
-
-            // scroll to bottom
-
-
-
-            // }
-      }, [id]); //the id param here is very
-      //important. it must be bear in mind
-      // that with the change in id only we want
-      //to know that we have chanfed to a different
-      // person and now we want to know messaged of
-      //different id that is different person
+      // console.log("msgs", messages_from_store);
 
       const sendMessage = (event) => {
             event.preventDefault();
             if (message !== "") {
-                  db.collection("rooms").doc(userEmail).collection("messages").doc(id).set({
+                  db.collection("messages").doc(id).collection("messages").add({
                         message: message,
                         name: userEmail,
                         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                  });
-                  setmessage("");
+                  }, { merge: true })
+                        .then(nothing => {
+                              setmessage("");
+                              setState(!state)
+                        })
+                        .catch(error => console.log(error))
             }
       };
 
-      const dispatch = useDispatch();
-
       const log_out = (e) => {
             e.preventDefault();
-            console.log("cliecked_logout");
             dispatch(logout());
-            console.log("cliecked_logout_after_dispatch");
+            firebase.auth().signOut().then(nothning => {
+                  history.push("/")
+            }).catch(error => {
+                  console.log(error);
+            })
       };
 
       useEffect(() => {
@@ -86,23 +79,31 @@ function Chatbox() {
 
       return (
             <div className="chatbox">
-                  <div className="chatbox_header">
-                        <div className="chatbox_header_avatar">
-                              <Avatar />
+                  {
+                        roomName ?
+                              <div className="chatbox_header">
+                                    <div style={{ display: "flex", alignItems: 'center' }}>
+                                          <div className="chatbox_header_avatar">
+                                                <Avatar src={photoURLForHeader} />
 
-                        </div>
+                                          </div>
+                                          <div className="chatbox_header_details">
+                                                <h3>{roomName}</h3>
+                                                <p>Last Seen At...</p>
+                                          </div>
+                                    </div>
 
-                        <div className="chatbox_header_details">
-                              <h3>{roomName}</h3>
-                              <p>Last Seen At...</p>
-                        </div>
-                        <div className="exit_icon" onClick={log_out}>
-                              <div className="exit_icon_icon">
-                                    <ExitToAppIcon onClick={log_out} />
+                                    <div className="exit_icon" style={{ marginRight: "30px", cursor: "pointer" }} onClick={log_out}>
+                                          <div className="">
+                                                <ExitToAppIcon onClick={log_out} />
+                                          </div>
+                                          <p>LogOut</p>
+                                    </div>
+                              </div> :
+                              <div style={{ height: "10%" }}>
                               </div>
-                              <p>LogOut</p>
-                        </div>
-                  </div>
+                  }
+
 
                   <div id="scrollDiv" className="message_scroll">
                         {messages_from_store.map((a_message) => (
@@ -115,9 +116,6 @@ function Chatbox() {
                                           <br />
                                           <p className="span_name">{a_message.name}</p>
                                           {a_message.message}
-                                          {/* <span className="span_time">
-                                                {new Date(messages_from_store.timestamp?.toDate()).toUTCString()}
-                                          </span> */}
                                     </p>
                               </div>
                         ))}
@@ -128,7 +126,7 @@ function Chatbox() {
                               <textarea style={{ border: "none", outline: "none", flex: "1" }}
                                     value={message}
                                     onChange={(e) => setmessage(e.target.value)}
-                                    type="text"
+                                    type="submit"
                                     placeholder="Type a message"
                               />
                               <SendOutlinedIcon fontSize="large" onClick={sendMessage} className="form_button" type="submit" style={{ cursor: "pointer" }} />

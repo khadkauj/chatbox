@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./Sidebar.css";
 import Avatar from "@material-ui/core/Avatar";
 import SearchIcon from "@material-ui/icons/Search";
 import Sidebarchat from "./Sidebarchat";
 import db from "./firebase";
 import firebase from "firebase";
 import { useSelector } from "react-redux";
-import { selectEmail, selectPhotourl, selectUser } from "./features/user/userSlice";
+import { selectEmail, selectPhotourl, selectUid, selectUser } from "./features/user/userSlice";
+
+
+import "./Sidebar.css";
 
 function Sidebar() {
       const [rooms, setrooms] = useState([]);
@@ -16,6 +18,7 @@ function Sidebar() {
       const user = useSelector(selectUser);
       const useremail = useSelector(selectEmail);
       const userphotourl = useSelector(selectPhotourl);
+      const uid = useSelector(selectUid)
 
       useEffect(() => {
             db.collection("rooms")
@@ -28,10 +31,8 @@ function Sidebar() {
                               }))
                         )
                   );
-            console.log(rooms);
       }, []);
 
-      console.log(rooms);
 
       const Add = () => {
             var newRoom = prompt("New room name?");
@@ -42,7 +43,7 @@ function Sidebar() {
                   });
             }
       };
-      console.log("url,", rooms);
+      console.log("rooms,", rooms);
       return (
 
             <div className="sidebar">
@@ -68,7 +69,10 @@ function Sidebar() {
                         <div className="sidebar_chat">
                               {rooms.map((a_room) => (
                                     <div className="classRoom" >
-                                          <Sidebarchat id={a_room.id} key={a_room.id} name={a_room.data.personName} photoURL={a_room.data.photoURL} />
+                                          <Sidebarchat id={a_room.id} key={a_room.id} name={a_room.data.personName} photoURL={a_room.data.photoURL}
+                                                uidConcatenation={a_room?.data?.uid < uid ? a_room?.data?.uid + uid : uid + a_room?.data?.uid}
+                                                email={a_room.data.personName}
+                                          />
                                           <p className="personNameInSmallGroup"> {a_room.data.personName}</p>
                                           <hr className="hrGroup" />
                                     </div>
