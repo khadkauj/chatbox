@@ -93,7 +93,7 @@ function Chatbox() {
                                           </div>
                                     </div>
 
-                                    <div className="exit_icon" style={{ marginRight: "30px", cursor: "pointer" }} onClick={log_out}>
+                                    <div className="exit_icon" style={{ marginRight: "15px", cursor: "pointer" }} onClick={log_out}>
                                           <div className="">
                                                 <ExitToAppIcon onClick={log_out} />
                                           </div>
@@ -107,17 +107,9 @@ function Chatbox() {
 
                   <div id="scrollDiv" className="message_scroll">
                         {messages_from_store.map((a_message) => (
-                              <div id="" className="chatbox_body">
-                                    <p
-                                          className={`chatbox_message_sender ${userEmail === a_message.name && `chatbox_message_receiver`
-                                                }`}
-                                    >
-                                          {" "}
-                                          <br />
-                                          <p className="span_name">{a_message.name}</p>
-                                          {a_message.message}
-                                    </p>
-                              </div>
+                              <p key={a_message.message} className={`chatbox_message_sender ${userEmail === a_message.name && `chatbox_message_receiver`}`}>
+                                    {a_message.message}
+                              </p>
                         ))}
                   </div>
 
@@ -128,6 +120,7 @@ function Chatbox() {
                                     onChange={(e) => setmessage(e.target.value)}
                                     type="submit"
                                     placeholder="Type a message"
+                                    autoFocus="true"
                               />
                               <SendOutlinedIcon fontSize="large" onClick={sendMessage} className="form_button" type="submit" style={{ cursor: "pointer" }} />
                         </form>

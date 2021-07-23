@@ -2,7 +2,6 @@
   display: flex;
   flex: 0.2;
   flex-direction: column;
-  font-family: cursive;
   width: fit-content;
   width: 100%;
   border: 1px solid lightgray;
@@ -70,7 +69,6 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  font-family: cursive;
   background-color: white;
   position: relative;
   width: 20%;

@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userWithWhomToChat } from "./features/user/userSlice"
-
+import firebase from "firebase"
 import "./Sidebarchat.css";
 function Sidebarchat({ id, name, photoURL, uidConcatenation, email }) {
 
@@ -11,7 +11,6 @@ function Sidebarchat({ id, name, photoURL, uidConcatenation, email }) {
 
 
       const sendEmailDispacth = () => {
-            console.log("photo,dis, ", photoURL);
             dispatch(
                   userWithWhomToChat({
                         chatWithPersonEmail: email,
@@ -20,7 +19,16 @@ function Sidebarchat({ id, name, photoURL, uidConcatenation, email }) {
             )
       }
 
-
+      firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                  dispatch(
+                        userWithWhomToChat({
+                              chatWithPersonEmail: email,
+                              chatWithPersonPhotoUrl: photoURL
+                        })
+                  )
+            }
+      })
 
 
       return (
