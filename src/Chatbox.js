@@ -120,7 +120,7 @@ function Chatbox() {
                                     onChange={(e) => setmessage(e.target.value)}
                                     type="submit"
                                     placeholder="Type a message"
-                                    autoFocus="true"
+                                    autoFocus={true}
                               />
                               <SendOutlinedIcon fontSize="large" onClick={sendMessage} className="form_button" type="submit" style={{ cursor: "pointer" }} />
                         </form>

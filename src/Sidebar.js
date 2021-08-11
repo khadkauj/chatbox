@@ -68,7 +68,7 @@ function Sidebar() {
                   <div className="sidebar_scroll">
                         <div className="sidebar_chat">
                               {rooms.map((a_room) => (
-                                    <div className="classRoom" >
+                                    <div className="classRoom" key={a_room.id} >
                                           <Sidebarchat id={a_room.id} key={a_room.id} name={a_room.data.personName} photoURL={a_room.data.photoURL}
                                                 uidConcatenation={a_room?.data?.uid < uid ? a_room?.data?.uid + uid : uid + a_room?.data?.uid}
                                                 email={a_room.data.personName}
